@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { useUser } from "./hooks/useUser";
+import { ActivateAccountView } from "./private/activate/ActivateAccountView";
+import { PrivateRoute } from "./private/components/PrivateRoute";
+import { LogoutView } from "./private/logout/LogoutView";
+import { ProductsView } from "./private/products/ProductsView";
+import { ProfileView } from "./private/profile/ProfileView";
+import { PublicRoute } from "./public/components/PublicRoute";
+import { HomeView } from "./public/HomeView";
+import { LoginView } from "./public/login/LoginView";
+import { PreviewView } from "./public/preview/PreviewView";
+import { RegisterView } from "./public/register/RegisterView";
 
 function App() {
+  const { user, setUser } = useUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Routes>
+        <Route index element={<HomeView />} />
+        <Route path="/" element={<HomeView />} />
+        <Route
+          element={
+            <PrivateRoute
+              isAllowed={!!user && user.active}
+              redirectPath="/activate"
+            />
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Route path="products" element={<ProductsView />} />
+          <Route path="profile" element={<ProfileView />} />
+          <Route path="logout" element={<LogoutView setUser={setUser} />} />
+        </Route>
+        <Route element={<PrivateRoute isAllowed={!!user} />}>
+          <Route path="activate" element={<ActivateAccountView />} />
+        </Route>
+        <Route element={<PublicRoute user={user} />}>
+          <Route path="login" element={<LoginView setUser={setUser} />} />
+          <Route path="register" element={<RegisterView />} />
+          <Route path="preview" element={<PreviewView />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
