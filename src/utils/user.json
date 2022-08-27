@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "ashraf",
+    "email": "hello@ceghap.com",
+    "password": "123456",
+    "username": "ceghap",
+    "code": 111111,
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "test user",
+    "email": "test@user.com",
+    "password": "123456",
+    "username": "testuser",
+    "code": 222222,
+    "active": false
+  }
+]

@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://static.wixstatic.com/media/3ba736_be1f7ac0f8bf4e049a5fb6616b18d827~mv2_d_1937_1405_s_2.png/v1/fill/w_220,h_140,al_c,q_85,usm_0.66_1.00_0.01/Regov%20Technologies%202%20PNG_edited.webp" width="200">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# { "developer": "Frontend-ReactJs" }
 
-## Available Scripts
+Hey! We are excited that you are interested in joining the team at Regov Technologies.
 
-In the project directory, you can run:
+We feel that the best place to really show us your skills is somewhere you feel comfortable. This test should not take you a long amount of time to complete.
 
-### `yarn start`
+This take home test is used to determine how you go about solving problems logically, as well as building out easy to use, performant user interfaces. This test is very open to interpretation and implementation.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Coding Challenge
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Build a simple user product management portal. The App will cater for the management of the following:
 
-### `yarn test`
+1. Products
+2. User profile
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Stories (Requirements)
 
-### `yarn build`
+AS a user I can do the following :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Register with my personal details( name, address, postcode, city, country, email, username) on the App. 2FA by email to activate account.
+- During registration I can upload my international passport and identity card (e.g license or national id).
+  Only jpg/png is allowed.
+- Preview my inputs and images on a different page that has a button to either return to personal information page to update information or submit the form.
+- I can update my personal details after account is activated.
+- Only after my account is activated, I can access and view a product page which allows me to add multiple products containing description, name and image.
+- After account is activated, will I be able to login to view available products with paginations.
+- As a user I can logout, and login again to view my profile.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Feel free to go above and beyond if you have ideas for extra features!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Notes and recommendations
 
-### `yarn eject`
+- Use ReactJS (TypeScript)
+- The project structure is up to your decision.
+- You are recommended to use git commits in a logical manner to demonstrate the development progress.
+- Writing tests and adhering to development standards/conventions will let you gain extra points.
+- Writing design documents will attract extra points :)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Submitting
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Your code should be made available in a public or private repository, on your personal github or bitbucket;
+2. Push up to your repo one last time
+3. Email your submission to careers@regovtech.com & techchallenge@regovtech.com
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Questions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you have any questions email the above emails.
