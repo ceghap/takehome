@@ -1,6 +1,6 @@
-import React from "react";
-import { Navbar } from "../../components/common/Navbar";
-import { Outlet } from "react-router";
+import React from 'react'
+import { Navbar } from '../../components/common/Navbar'
+import { Outlet } from 'react-router'
 
 export const PublicLayout = () => {
   return (
@@ -8,5 +8,5 @@ export const PublicLayout = () => {
       <Navbar />
       <Outlet />
     </>
-  );
-};
+  )
+}

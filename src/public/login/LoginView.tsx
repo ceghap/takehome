@@ -1,30 +1,30 @@
-import { useState } from "react";
-import { User } from "../../hooks/useUser";
-import { Login } from "../../utils/login";
-import { useFormik } from "formik";
-import { validationSchema } from "./LoginValidator";
+import { useState } from 'react'
+import { User } from '../../hooks/useUser'
+import { Login } from '../../utils/login'
+import { useFormik } from 'formik'
+import { validationSchema } from './LoginValidator'
 
 interface Props {
-  setUser: (value: User) => void;
+  setUser: (value: User) => void
 }
 
 export const LoginView = ({ setUser }: Props) => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema,
     onSubmit: async (values) => {
-      const user = await Login(values.email, values.password);
+      const user = await Login(values.email, values.password)
 
-      if (!user) return setError(true);
+      if (!user) return setError(true)
 
-      setUser(user);
+      setUser(user)
     },
-  });
+  })
 
   return (
     <div>
@@ -32,19 +32,17 @@ export const LoginView = ({ setUser }: Props) => {
       <h1>Login View</h1>
       <form onSubmit={formik.handleSubmit}>
         <input
-          type="email"
-          name="email"
+          type='email'
+          name='email'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
+        {formik.touched.email && formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
         <input
-          type="password"
-          name="password"
+          type='password'
+          name='password'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
@@ -53,31 +51,31 @@ export const LoginView = ({ setUser }: Props) => {
           <div>{formik.errors.password}</div>
         ) : null}
 
-        <button type="submit">Login</button>
+        <button type='submit'>Login</button>
       </form>
 
       <div>
         {JSON.stringify(
           {
-            email: "hello@ceghap.com",
-            password: "123456",
+            email: 'hello@ceghap.com',
+            password: '123456',
             active: true,
           },
           null,
-          2
+          2,
         )}
       </div>
       <div>
         {JSON.stringify(
           {
-            email: "test@user.com",
-            password: "123456",
+            email: 'test@user.com',
+            password: '123456',
             active: false,
           },
           null,
-          2
+          2,
         )}
       </div>
     </div>
-  );
-};
+  )
+}
