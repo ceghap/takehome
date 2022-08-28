@@ -130,29 +130,6 @@ export const ProfileForm = () => {
             helperText={formik.touched.postcode && formik.errors.postcode}
           />
 
-          {/* <img src={formik.values.photoId} width='100%' height='auto' />
-          <Button
-            onClick={deletePhotoId}
-            variant='contained'
-            color='error'
-            sx={{ margin: '20px 0' }}
-          >
-            Delete
-          </Button> */}
-
-          <TextField
-            fullWidth
-            label='Photo ID'
-            margin='normal'
-            type='file'
-            name='photoId'
-            id='photoId'
-            onChange={formik.handleChange}
-            value={formik.values.photoId}
-            error={formik.touched.photoId && Boolean(formik.errors.photoId)}
-            helperText={formik.touched.photoId && formik.errors.photoId}
-          />
-
           <Button color='primary' variant='contained' fullWidth type='submit'>
             Save
           </Button>
