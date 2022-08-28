@@ -3,10 +3,10 @@ import { ProfileForm } from './ProfileForm'
 
 export const ProfileView = () => {
   return (
-    <main style={{ padding: '1rem 0' }}>
-      <h2>Profile</h2>
+    <>
+      <h1>Profile</h1>
 
       <ProfileForm />
-    </main>
+    </>
   )
 }

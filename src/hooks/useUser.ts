@@ -1,12 +1,18 @@
 import { useState } from 'react'
 
 export interface User {
-  id: number
-  name: string
+  id?: number
   email: string
   password: string
   code: number
   active: boolean
+  name: string
+  username: string
+  address: string
+  country: string
+  city: string
+  postcode: string
+  photoId: string
 }
 
 export const useUser = () => {

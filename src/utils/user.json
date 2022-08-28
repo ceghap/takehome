@@ -1,20 +1,30 @@
 [
   {
     "id": 1,
-    "name": "ashraf",
     "email": "hello@ceghap.com",
     "password": "123456",
-    "username": "ceghap",
     "code": 111111,
-    "active": true
+    "active": true,
+    "name": "ashraf",
+    "username": "ceghap",
+    "address": "address 1",
+    "country": "malaysia",
+    "city": "Kepala Batas",
+    "postcode": "13200",
+    "photoId": "https://via.placeholder.com/1920x200/0000FF/808080?Text=photo id"
   },
   {
     "id": 2,
-    "name": "test user",
     "email": "test@user.com",
     "password": "123456",
-    "username": "testuser",
     "code": 222222,
-    "active": false
+    "active": false,
+    "name": "test user",
+    "username": "testuser",
+    "address": "address 1",
+    "country": "malaysia",
+    "city": "Kepala Batas",
+    "postcode": "13200",
+    "photoId": "https://via.placeholder.com/1920x200/0000FF/808080?Text=photoid"
   }
 ]
