@@ -11,6 +11,7 @@ export interface Profile {
   id?: number | undefined
   email: string
   password: string
+  confirmPassword?: string
   code?: number | undefined
   active: boolean
   name: string

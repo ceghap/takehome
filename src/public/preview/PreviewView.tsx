@@ -1,5 +1,11 @@
 import React from 'react'
+import { PreviewForm } from './components/PreviewForm'
 
 export const PreviewView = () => {
-  return <div>PreviewView</div>
+  return (
+    <>
+      <h1>Preview</h1>
+      <PreviewForm />
+    </>
+  )
 }
