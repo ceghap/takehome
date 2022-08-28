@@ -5,14 +5,12 @@ import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import { Form } from '../../components/common/Form'
-import { User } from '../../hooks/useUser'
+import { Profile } from '../../private/profile/ProfileSlice'
 import { Login } from '../../utils/login'
 import { validationSchema } from './LoginValidator'
-import { store } from '../../store'
-import { useHookstate } from '@hookstate/core'
 
 interface Props {
-  setUser: (value: User) => void
+  setUser: (value: Profile) => void
 }
 
 interface FormValues {
@@ -21,7 +19,6 @@ interface FormValues {
 }
 export const LoginView = ({ setUser }: Props) => {
   const [error, setError] = useState(false)
-  const { profile } = useHookstate(store)
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -33,7 +30,7 @@ export const LoginView = ({ setUser }: Props) => {
       const user = await Login(values.email, values.password)
 
       if (!user) return setError(true)
-      profile.merge(user)
+
       setUser(user)
     },
   })

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-
+import { useAppDispatch } from '../hooks'
+import { set, Profile } from '../private/profile/ProfileSlice'
 export interface User {
   id?: number
   email: string
@@ -16,19 +17,20 @@ export interface User {
 }
 
 export const useUser = () => {
+  const dispatch = useAppDispatch()
   function getUser() {
     const userString = sessionStorage.getItem('user')
 
     if (userString === 'undefined') return undefined
 
-    const user = typeof userString === 'string' && JSON.parse(userString)
-
+    const user: Profile = typeof userString === 'string' && JSON.parse(userString)
+    dispatch(set(user))
     return user
   }
 
-  const [user, setUser] = useState<User | undefined>(getUser())
+  const [user, setUser] = useState<Profile | undefined>(getUser())
 
-  const saveUser = (user: User | undefined) => {
+  const saveUser = (user: Profile | undefined) => {
     sessionStorage.setItem('user', JSON.stringify(user))
     setUser(user)
   }

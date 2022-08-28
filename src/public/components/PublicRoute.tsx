@@ -1,10 +1,11 @@
 import React from 'react'
-import { User } from '../../hooks/useUser'
+
 import { Navigate } from 'react-router-dom'
 import { PublicLayout } from './PublicLayout'
+import { Profile } from '../../private/profile/ProfileSlice'
 
 interface Props {
-  user: User | undefined
+  user: Profile | undefined
 }
 export const PublicRoute = ({ user }: Props) => {
   if (!user) {

@@ -1,28 +1,11 @@
-import { createState } from '@hookstate/core'
+import { configureStore } from '@reduxjs/toolkit'
+import profileReducer from './private/profile/ProfileSlice'
 
-export const store = createState({
-  profile: {
-    id: 0,
-    email: '',
-    password: '',
-    code: 0,
-    active: false,
-    name: '',
-    username: '',
-    address: '',
-    country: '',
-    city: '',
-    postcode: '',
-    photoId: '',
-  },
-  products: {
-    page: 0,
-    rowsPerPage: 5,
-    data: [],
-  },
-  product: {
-    name: '',
-    description: '',
-    image: '',
-  },
+export const store = configureStore({
+  reducer: { profile: profileReducer },
 })
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

@@ -6,52 +6,40 @@ import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { Form } from '../../components/common/Form'
 import { validationSchema } from './ProfileValidator'
-import { store } from '../../../src/store'
-import { useHookstate } from '@hookstate/core'
-import { User } from '../../hooks/useUser'
-interface FormValues {
-  name: string
-  email: string
-  username: string
-  address: string
-  postcode: string
-  country: string
-  city: string
-  photoId: string
-}
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { update, Profile } from './ProfileSlice'
 
 export const ProfileForm = () => {
-  const { profile: storeProfile } = useHookstate(store)
-
-  const profile = storeProfile.get()
-
-  const formik = useFormik<FormValues>({
+  //   const [image, setImage] = useState('')
+  const profile = useAppSelector((state) => state.profile.profile)
+  const dispatch = useAppDispatch()
+  const formik = useFormik<Omit<Profile, 'code'>>({
     initialValues: {
-      name: profile?.name || '',
-      email: profile?.email || '',
-      username: profile?.username || '',
-      address: profile?.address || '',
-      postcode: profile?.postcode || '',
-      country: profile?.country || '',
-      city: profile?.city || '',
-      photoId: profile?.photoId || '',
+      id: profile.data.id || undefined,
+      name: profile.data.name || '',
+      email: profile.data.email || '',
+      username: profile.data.username || '',
+      address: profile.data.address || '',
+      postcode: profile.data.postcode || '',
+      country: profile.data.country || '',
+      city: profile.data.city || '',
+      password: profile.data.password || '',
+      photoId: '',
+      active: profile.data.active || false,
     },
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
       console.log(values)
-      storeProfile.merge(values)
+      dispatch(update(values))
     },
   })
 
-  const deletePhotoId = () => {
-    console.log('del')
-  }
-
+  console.log(formik)
   return (
     <>
-      {storeProfile.error && <Alert severity='error'>{storeProfile.error?.message}</Alert>}
-      {storeProfile.promised ? (
+      {profile.error && <Alert severity='error'>{profile.error.message}</Alert>}
+      {profile.loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />
         </Box>
@@ -142,7 +130,7 @@ export const ProfileForm = () => {
             helperText={formik.touched.postcode && formik.errors.postcode}
           />
 
-          <img src={formik.values.photoId} width='100%' height='auto' />
+          {/* <img src={formik.values.photoId} width='100%' height='auto' />
           <Button
             onClick={deletePhotoId}
             variant='contained'
@@ -150,9 +138,9 @@ export const ProfileForm = () => {
             sx={{ margin: '20px 0' }}
           >
             Delete
-          </Button>
+          </Button> */}
 
-          {/* <TextField
+          <TextField
             fullWidth
             label='Photo ID'
             margin='normal'
@@ -163,7 +151,7 @@ export const ProfileForm = () => {
             value={formik.values.photoId}
             error={formik.touched.photoId && Boolean(formik.errors.photoId)}
             helperText={formik.touched.photoId && formik.errors.photoId}
-          /> */}
+          />
 
           <Button color='primary' variant='contained' fullWidth type='submit'>
             Save
