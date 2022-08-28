@@ -4,10 +4,10 @@ import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
-import { Form } from '../../components/common/Form'
-import { validationSchema } from './ProfileValidator'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { update, Profile } from './ProfileSlice'
+import { Form } from '../../../components/common/Form'
+import { validationSchema } from '../ProfileValidator'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { update, Profile } from '../ProfileSlice'
 
 export const ProfileForm = () => {
   const profile = useAppSelector((state) => state.profile.profile)
