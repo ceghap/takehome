@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { update, Profile } from './ProfileSlice'
 
 export const ProfileForm = () => {
-  //   const [image, setImage] = useState('')
   const profile = useAppSelector((state) => state.profile.profile)
   const dispatch = useAppDispatch()
   const formik = useFormik<Omit<Profile, 'code'>>({
@@ -30,12 +29,10 @@ export const ProfileForm = () => {
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values)
       dispatch(update(values))
     },
   })
 
-  console.log(formik)
   return (
     <>
       {profile.error && <Alert severity='error'>{profile.error.message}</Alert>}
