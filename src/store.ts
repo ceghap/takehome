@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import profileReducer, { set } from './private/profile/ProfileSlice'
+import productsReducer from './private/products/ProductsSlice'
 
 export const store = configureStore({
-  reducer: { profile: profileReducer },
+  reducer: { profile: profileReducer, product: productsReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

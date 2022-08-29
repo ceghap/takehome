@@ -24,7 +24,7 @@ export interface Profile {
   photoId?: File | undefined | string
 }
 
-export interface SliceState {
+interface ProfileSliceState {
   profile: {
     loading: boolean
     data: Profile
@@ -33,7 +33,7 @@ export interface SliceState {
   }
 }
 
-export const initialState: SliceState = {
+export const initialState: ProfileSliceState = {
   profile: {
     loading: false,
     data: {} as Profile,
