@@ -1,24 +1,24 @@
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container'
-import Divider from '@mui/material/Divider'
-import TextField from '@mui/material/TextField'
-import { useFormik } from 'formik'
-import { useState } from 'react'
-import { Form } from '../../components/common/Form'
-import { Profile } from '../../private/profile/ProfileSlice'
-import { Login } from '../../utils/login'
-import { validationSchema } from './LoginValidator'
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import { Form } from '../../components/common/Form';
+import { Profile } from '../../private/profile/ProfileSlice';
+import { Login } from '../../utils/login';
+import { validationSchema } from './LoginValidator';
 
 interface Props {
-  setUser: (value: Omit<Profile, 'profileId'>) => void
+  setUser: (value: Omit<Profile, 'profileId'>) => void;
 }
 
 interface FormValues {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 export const LoginView = ({ setUser }: Props) => {
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   const formik = useFormik<FormValues>({
     initialValues: {
@@ -27,13 +27,13 @@ export const LoginView = ({ setUser }: Props) => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      const user = await Login(values.email, values.password)
+      const user = await Login(values.email, values.password);
 
-      if (!user) return setError(true)
+      if (!user) return setError(true);
 
-      setUser(user)
+      setUser(user);
     },
-  })
+  });
 
   return (
     <Container maxWidth='sm'>
@@ -99,5 +99,5 @@ export const LoginView = ({ setUser }: Props) => {
         )}
       </div>
     </Container>
-  )
-}
+  );
+};

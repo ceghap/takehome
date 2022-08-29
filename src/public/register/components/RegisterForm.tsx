@@ -1,21 +1,21 @@
-import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import TextField from '@mui/material/TextField'
-import { useFormik } from 'formik'
-import { Form } from '../../../components/common/Form'
-import { validationSchema } from '../RegisterValidator'
-import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { set, Profile } from '../../../private/profile/ProfileSlice'
-import { useNavigate } from 'react-router-dom'
-import { Thumb } from './Thumb'
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import { Form } from '../../../components/common/Form';
+import { validationSchema } from '../RegisterValidator';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { set, Profile } from '../../../private/profile/ProfileSlice';
+import { useNavigate } from 'react-router-dom';
+import { Thumb } from './Thumb';
 
 export const RegisterForm = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const profile = useAppSelector((state) => state.profile.profile)
-  const dispatch = useAppDispatch()
+  const profile = useAppSelector((state) => state.profile.profile);
+  const dispatch = useAppDispatch();
   const formik = useFormik<Omit<Profile, 'code'>>({
     initialValues: {
       id: profile.data.id || undefined,
@@ -34,12 +34,12 @@ export const RegisterForm = () => {
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
-      dispatch(set(values))
-      navigate('/preview')
+      dispatch(set(values));
+      navigate('/preview');
     },
-  })
+  });
 
-  console.log(formik)
+  console.log(formik);
 
   return (
     <>
@@ -178,13 +178,13 @@ export const RegisterForm = () => {
             id='photoId'
             inputProps={{ accept: 'image/jpg, image/jpeg, image/png' }}
             onChange={(e) => {
-              const files = (e.currentTarget as HTMLInputElement).files
+              const files = (e.currentTarget as HTMLInputElement).files;
               if (files) {
-                const file = files[0]
+                const file = files[0];
                 if (file !== null) {
-                  formik.setFieldValue('photoId', file)
+                  formik.setFieldValue('photoId', file);
                   if (file) {
-                    console.log(URL.createObjectURL(file))
+                    console.log(URL.createObjectURL(file));
                   }
                 }
               }
@@ -201,5 +201,5 @@ export const RegisterForm = () => {
         </Form>
       )}
     </>
-  )
-}
+  );
+};

@@ -1,5 +1,5 @@
-import React from 'react'
-import { ProfileForm } from './components/ProfileForm'
+import React from 'react';
+import { ProfileForm } from './components/ProfileForm';
 
 export const ProfileView = () => {
   return (
@@ -8,5 +8,5 @@ export const ProfileView = () => {
 
       <ProfileForm />
     </>
-  )
-}
+  );
+};
