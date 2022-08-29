@@ -20,7 +20,8 @@ export interface Profile {
   country: string
   city: string
   postcode: string
-  photoId: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  photoId: any
 }
 
 export interface SliceState {

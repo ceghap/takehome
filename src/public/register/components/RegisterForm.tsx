@@ -9,6 +9,7 @@ import { validationSchema } from '../../../private/profile/ProfileValidator'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { set, Profile } from '../../../private/profile/ProfileSlice'
 import { useNavigate } from 'react-router-dom'
+import { Thumb } from './Thumb'
 
 export const RegisterForm = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ export const RegisterForm = () => {
       country: profile.data.country || '',
       city: profile.data.city || '',
       password: profile.data.password || '',
-      photoId: '',
+      photoId: profile.data.photoId || null,
       active: profile.data.active || false,
       confirmPassword: '',
     },
@@ -38,7 +39,6 @@ export const RegisterForm = () => {
     },
   })
 
-  console.log(formik)
   return (
     <>
       {profile.error && <Alert severity='error'>{profile.error.message}</Alert>}
@@ -158,16 +158,27 @@ export const RegisterForm = () => {
 
           <TextField
             fullWidth
-            label='Photo ID'
+            label='Photo Id'
             margin='normal'
             type='file'
             name='photoId'
             id='photoId'
-            onChange={formik.handleChange}
-            value={formik.values.photoId}
+            onChange={(e) => {
+              const files = (e.currentTarget as HTMLInputElement).files
+              if (files) {
+                const file = files[0]
+                if (file !== null) {
+                  formik.setFieldValue('photoId', file)
+                  if (file) {
+                    console.log(URL.createObjectURL(file))
+                  }
+                }
+              }
+            }}
             error={formik.touched.photoId && Boolean(formik.errors.photoId)}
-            helperText={formik.touched.photoId && formik.errors.photoId}
           />
+
+          <Thumb file={formik.values.photoId} />
 
           <Button color='primary' variant='contained' fullWidth type='submit'>
             Preview

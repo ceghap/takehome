@@ -9,6 +9,7 @@ import { validationSchema } from '../../../private/profile/ProfileValidator'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import { update, Profile } from '../../../private/profile/ProfileSlice'
 import { useNavigate } from 'react-router-dom'
+import { Thumb } from '../../register/components/Thumb'
 
 export const PreviewForm = () => {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ export const PreviewForm = () => {
       country: profile.data.country || '',
       city: profile.data.city || '',
       password: profile.data.password || '',
-      photoId: '',
+      photoId: profile.data.photoId || null,
       active: profile.data.active || false,
     },
     enableReinitialize: true,
@@ -134,6 +135,8 @@ export const PreviewForm = () => {
             helperText={formik.touched.postcode && formik.errors.postcode}
             disabled
           />
+
+          <Thumb file={formik.values.photoId} />
 
           <Box>
             <Button
