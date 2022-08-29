@@ -7,10 +7,14 @@ export const fetchProducts = createAsyncThunk(
     const response = await axios.get(
       `https://api.storerestapi.com/products?limit=${query.limit}&page=${query.page}`,
     );
-
-    return response.data.data;
+    return response.data;
   },
 );
+
+export const fetchAllProducts = createAsyncThunk('products/fetchAll', async () => {
+  const response = await axios.get('https://api.storerestapi.com/products');
+  return response.data;
+});
 
 export const createProduct = createAsyncThunk('product/create', async (values: Product) => {
   const body: Product = {
@@ -40,14 +44,15 @@ export interface Product {
 export interface Products {
   loading: boolean;
   data: Product[] | undefined;
-  limit: number;
-  page: number;
-  totalProducts: number | undefined;
-  nextPage: number;
-  totalPages: number | undefined;
   error: SerializedError | null;
 }
-
+interface Pagination {
+  size: number;
+  page: number;
+  count: number;
+  totalPages: number;
+  currentPage: number;
+}
 export interface ProductSliceState {
   product: {
     loading: boolean;
@@ -55,6 +60,7 @@ export interface ProductSliceState {
     error: SerializedError | null;
   };
   products: Products;
+  pagination: Pagination;
 }
 
 export const initialState: ProductSliceState = {
@@ -66,12 +72,14 @@ export const initialState: ProductSliceState = {
   products: {
     loading: false,
     data: [],
-    limit: 10,
-    page: 1,
-    totalProducts: undefined,
-    nextPage: 2,
-    totalPages: undefined,
     error: null,
+  },
+  pagination: {
+    size: 10, // limit
+    page: 0,
+    count: 0, // totalProducts
+    totalPages: 0,
+    currentPage: 1,
   },
 };
 
@@ -79,6 +87,12 @@ export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
+    setPage: (state, action) => {
+      state.pagination.page = action.payload;
+    },
+    setSize: (state, action) => {
+      state.pagination.size = action.payload;
+    },
     clearProduct: (state) => {
       state.product.data = {} as Product;
     },
@@ -90,12 +104,24 @@ export const productSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.products.loading = false;
       state.products.data = action.payload.data;
-      state.products.page = action.payload.currentPage;
-      state.products.totalProducts = action.payload.totalProducts;
-      state.products.nextPage = action.payload.nextPage;
-      state.products.totalPages = action.payload.totalPages;
+      state.pagination.count = action.payload.metadata.totalProducts;
+      state.pagination.totalPages = action.payload.metadata.totalPages;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
+      state.products.loading = false;
+      state.products.error = action.error;
+    });
+    builder.addCase(fetchAllProducts.pending, (state) => {
+      state.products.loading = true;
+    });
+    builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
+      state.products.loading = false;
+      state.products.data = action.payload.data;
+      state.pagination.count = action.payload.data.length;
+      state.pagination.totalPages = 1;
+      state.pagination.page = 1;
+    });
+    builder.addCase(fetchAllProducts.rejected, (state, action) => {
       state.products.loading = false;
       state.products.error = action.error;
     });
@@ -120,6 +146,6 @@ export const productSlice = createSlice({
   },
 });
 
-export const { clearProduct } = productSlice.actions;
+export const { clearProduct, setPage, setSize } = productSlice.actions;
 
 export default productSlice.reducer;
