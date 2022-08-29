@@ -5,11 +5,15 @@ import CircularProgress from '@mui/material/CircularProgress'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { Form } from '../../../components/common/Form'
-import { validationSchema } from '../ProfileValidator'
+import { validationSchema } from '../RegisterValidator'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { update, Profile } from '../ProfileSlice'
+import { set, Profile } from '../../../private/profile/ProfileSlice'
+import { useNavigate } from 'react-router-dom'
+import { Thumb } from './Thumb'
 
-export const ProfileForm = () => {
+export const RegisterForm = () => {
+  const navigate = useNavigate()
+
   const profile = useAppSelector((state) => state.profile.profile)
   const dispatch = useAppDispatch()
   const formik = useFormik<Omit<Profile, 'code'>>({
@@ -23,15 +27,19 @@ export const ProfileForm = () => {
       country: profile.data.country || '',
       city: profile.data.city || '',
       password: profile.data.password || '',
-      photoId: '',
+      photoId: profile.data.photoId || undefined,
       active: profile.data.active || false,
+      confirmPassword: '',
     },
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
-      dispatch(update(values))
+      dispatch(set(values))
+      navigate('/preview')
     },
   })
+
+  console.log(formik)
 
   return (
     <>
@@ -52,6 +60,8 @@ export const ProfileForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
           />
           <TextField
             fullWidth
@@ -71,7 +81,6 @@ export const ProfileForm = () => {
             label='Username'
             margin='normal'
             type='username'
-            disabled={true}
             name='username'
             id='username'
             onChange={formik.handleChange}
@@ -160,8 +169,34 @@ export const ProfileForm = () => {
             helperText={formik.touched.postcode && formik.errors.postcode}
           />
 
+          <TextField
+            fullWidth
+            label='Photo Id'
+            margin='normal'
+            type='file'
+            name='photoId'
+            id='photoId'
+            inputProps={{ accept: 'image/jpg, image/jpeg, image/png' }}
+            onChange={(e) => {
+              const files = (e.currentTarget as HTMLInputElement).files
+              if (files) {
+                const file = files[0]
+                if (file !== null) {
+                  formik.setFieldValue('photoId', file)
+                  if (file) {
+                    console.log(URL.createObjectURL(file))
+                  }
+                }
+              }
+            }}
+            onBlur={formik.handleBlur}
+            error={formik.touched.photoId && Boolean(formik.errors.photoId)}
+            helperText={formik.touched.photoId && formik.errors.photoId}
+          />
+          <Thumb file={formik.values.photoId} />
+
           <Button color='primary' variant='contained' fullWidth type='submit'>
-            Save
+            Preview
           </Button>
         </Form>
       )}

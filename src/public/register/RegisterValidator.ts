@@ -14,4 +14,12 @@ export const validationSchema = Yup.object({
   country: Yup.string().required(),
   city: Yup.string().required(),
   postcode: Yup.string().required(),
+  photoId: Yup.mixed()
+    .required('A file is required')
+    .nullable()
+    .test(
+      'type',
+      'Only the following formats are accepted: .jpeg, .jpg, .png',
+      (value) => !value || (value && SUPPORTED_FORMATS.includes(value.type)),
+    ),
 })

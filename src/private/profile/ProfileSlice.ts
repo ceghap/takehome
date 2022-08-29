@@ -11,6 +11,7 @@ export interface Profile {
   id?: number | undefined
   email: string
   password: string
+  confirmPassword?: string
   code?: number | undefined
   active: boolean
   name: string
@@ -19,7 +20,8 @@ export interface Profile {
   country: string
   city: string
   postcode: string
-  photoId: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  photoId?: File | undefined | string
 }
 
 export interface SliceState {
