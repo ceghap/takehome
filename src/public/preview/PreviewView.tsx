@@ -1,5 +1,5 @@
-import React from 'react'
-import { PreviewForm } from './components/PreviewForm'
+import React from 'react';
+import { PreviewForm } from './components/PreviewForm';
 
 export const PreviewView = () => {
   return (
@@ -7,5 +7,5 @@ export const PreviewView = () => {
       <h1>Preview</h1>
       <PreviewForm />
     </>
-  )
-}
+  );
+};

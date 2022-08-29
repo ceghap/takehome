@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import Box from '@mui/material/Box'
-import { SUPPORTED_FORMATS } from '../../../private/profile/ProfileValidator'
+import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import { SUPPORTED_FORMATS } from '../../../private/profile/ProfileValidator';
 
 export const Thumb = ({ file }: { file: Blob | undefined | string }) => {
-  const [loading, setLoading] = useState(false)
-  const [thumb, setThumb] = useState<string>('')
+  const [loading, setLoading] = useState(false);
+  const [thumb, setThumb] = useState<string>('');
 
   useEffect(() => {
     if (file && typeof file !== 'string') {
-      setLoading(true)
+      setLoading(true);
 
-      console.log(file.type)
-      const reader = new FileReader()
+      console.log(file.type);
+      const reader = new FileReader();
 
       reader.onloadend = () => {
-        setLoading(false)
+        setLoading(false);
 
         if (typeof reader.result === 'string') {
           if (SUPPORTED_FORMATS.includes(file.type)) {
-            setThumb(reader.result)
+            setThumb(reader.result);
           } else {
-            setThumb('/preview.jpg')
+            setThumb('/preview.jpg');
           }
         }
-      }
+      };
 
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     }
-  }, [file])
+  }, [file]);
 
   if (loading) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
 
   if (thumb) {
@@ -38,8 +38,8 @@ export const Thumb = ({ file }: { file: Blob | undefined | string }) => {
       <Box>
         <img src={thumb} height='auto' width={500} />
       </Box>
-    )
+    );
   } else {
-    return <img src='/preview.jpg' height='auto' width={500} />
+    return <img src='/preview.jpg' height='auto' width={500} />;
   }
-}
+};

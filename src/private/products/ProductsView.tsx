@@ -1,25 +1,25 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import Paper from '@mui/material/Paper'
-import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
 
-import { useFormik } from 'formik'
-import { useEffect, useState } from 'react'
-import { Form } from '../../components/common/Form'
-import { ProductsTable } from './components/ProductsTable'
-import { useAppSelector, useAppDispatch } from '../../hooks'
-import { fetchProducts, createProduct } from './ProductsSlice'
-import { validationSchema } from './ProductValidator'
+import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
+import { Form } from '../../components/common/Form';
+import { ProductsTable } from './components/ProductsTable';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchProducts, createProduct } from './ProductsSlice';
+import { validationSchema } from './ProductValidator';
 
 export const ProductsView = () => {
-  const [formOpen, setFormOpen] = useState(false)
+  const [formOpen, setFormOpen] = useState(false);
 
-  const products = useAppSelector((state) => state.product.products)
-  const product = useAppSelector((state) => state.product.product)
-  const dispatch = useAppDispatch()
+  const products = useAppSelector((state) => state.product.products);
+  const product = useAppSelector((state) => state.product.product);
+  const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -29,23 +29,23 @@ export const ProductsView = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(createProduct(values))
-      hideForm()
+      dispatch(createProduct(values));
+      hideForm();
     },
-  })
+  });
 
   const showForm = () => {
-    setFormOpen(true)
-  }
+    setFormOpen(true);
+  };
 
   const hideForm = () => {
-    formik.resetForm()
-    setFormOpen(false)
-  }
+    formik.resetForm();
+    setFormOpen(false);
+  };
 
   useEffect(() => {
-    dispatch(fetchProducts({ limit: products.limit, page: products.page }))
-  }, [dispatch, products.limit, products.page])
+    dispatch(fetchProducts({ limit: products.limit, page: products.page }));
+  }, [dispatch, products.limit, products.page]);
 
   return (
     <>
@@ -128,5 +128,5 @@ export const ProductsView = () => {
 
       {products && <ProductsTable products={products} />}
     </>
-  )
-}
+  );
+};

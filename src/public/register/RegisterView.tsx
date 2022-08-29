@@ -1,5 +1,5 @@
-import React from 'react'
-import { RegisterForm } from './components/RegisterForm'
+import React from 'react';
+import { RegisterForm } from './components/RegisterForm';
 
 export const RegisterView = () => {
   return (
@@ -8,5 +8,5 @@ export const RegisterView = () => {
 
       <RegisterForm />
     </>
-  )
-}
+  );
+};

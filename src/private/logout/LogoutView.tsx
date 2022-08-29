@@ -1,10 +1,10 @@
-import { User } from '../../hooks/useUser'
+import { User } from '../../hooks/useUser';
 
 interface Props {
-  setUser: (value: User | undefined) => void
+  setUser: (value: User | undefined) => void;
 }
 
 export const LogoutView = ({ setUser }: Props) => {
-  setUser(undefined)
-  return <>{null}</>
-}
+  setUser(undefined);
+  return <>{null}</>;
+};

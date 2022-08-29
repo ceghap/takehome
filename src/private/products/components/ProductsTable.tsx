@@ -1,25 +1,25 @@
-import React from 'react'
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableFooter from '@mui/material/TableFooter'
-import TableHead from '@mui/material/TableHead'
-import TablePagination from '@mui/material/TablePagination'
-import TableRow from '@mui/material/TableRow'
-import { Product, Products } from '../ProductsSlice'
+import React from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableFooter from '@mui/material/TableFooter';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import { Product, Products } from '../ProductsSlice';
 
 export const ProductsTable = ({ products }: { products: Products }) => {
   const handleChangePage = () => {
-    console.log('a')
-  }
+    console.log('a');
+  };
   const handleChangeRowsPerPage = () => {
-    console.log('a')
-  }
+    console.log('a');
+  };
   const TablePaginationActions = () => {
-    console.log('a')
-  }
+    console.log('a');
+  };
   return (
     <TableContainer sx={{ margin: '20px 0' }} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -67,5 +67,5 @@ export const ProductsTable = ({ products }: { products: Products }) => {
         </TableFooter>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};

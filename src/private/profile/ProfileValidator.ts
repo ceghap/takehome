@@ -1,6 +1,6 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
-export const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png']
+export const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
 
 export const validationSchema = Yup.object({
   name: Yup.string().min(5).max(100).required(),
@@ -14,4 +14,4 @@ export const validationSchema = Yup.object({
   country: Yup.string().required(),
   city: Yup.string().required(),
   postcode: Yup.string().required(),
-})
+});

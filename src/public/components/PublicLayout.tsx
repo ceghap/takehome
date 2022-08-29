@@ -1,7 +1,7 @@
-import React from 'react'
-import { Navbar } from '../../components/common/Navbar'
-import { Outlet } from 'react-router'
-import Container from '@mui/material/Container'
+import React from 'react';
+import { Navbar } from '../../components/common/Navbar';
+import { Outlet } from 'react-router';
+import Container from '@mui/material/Container';
 
 export const PublicLayout = () => {
   return (
@@ -11,5 +11,5 @@ export const PublicLayout = () => {
         <Outlet />
       </Container>
     </>
-  )
-}
+  );
+};
