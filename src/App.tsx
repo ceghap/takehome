@@ -26,8 +26,8 @@ function App() {
           <Route path='profile' element={<ProfileView />} />
           <Route path='logout' element={<LogoutView setUser={setUser} />} />
         </Route>
-        <Route element={<PrivateRoute isAllowed={!!user} />}>
-          <Route path='activate' element={<ActivateAccountView />} />
+        <Route element={<PrivateRoute isAllowed={!!user && !user.active} />}>
+          <Route path='activate' element={<ActivateAccountView setUser={setUser} />} />
         </Route>
         <Route element={<PublicRoute user={user} />}>
           <Route path='login' element={<LoginView setUser={setUser} />} />

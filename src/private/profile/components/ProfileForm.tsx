@@ -52,6 +52,7 @@ export const ProfileForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
+            helperText={formik.touched.name && formik.errors.name}
           />
           <TextField
             fullWidth
@@ -92,6 +93,7 @@ export const ProfileForm = () => {
             value={formik.values.password}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
+            required
           />
           <TextField
             fullWidth
@@ -105,6 +107,7 @@ export const ProfileForm = () => {
             value={formik.values.confirmPassword}
             error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
             helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+            required
           />
           <TextField
             fullWidth
