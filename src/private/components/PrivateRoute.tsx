@@ -1,14 +1,14 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import { PrivateLayout } from "./PrivateLayout";
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+import { PrivateLayout } from './PrivateLayout'
 
 interface Props {
-  isAllowed: boolean;
-  redirectPath?: string;
+  isAllowed: boolean
+  redirectPath?: string
 }
-export const PrivateRoute = ({ isAllowed, redirectPath = "/login" }: Props) => {
+export const PrivateRoute = ({ isAllowed, redirectPath = '/login' }: Props) => {
   if (!isAllowed) {
-    return <Navigate to={redirectPath} replace />;
+    return <Navigate to={redirectPath} replace />
   }
-  return <PrivateLayout />;
-};
+  return <PrivateLayout />
+}

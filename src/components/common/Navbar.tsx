@@ -1,5 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
 export const Navbar = ({ isPrivate = false }: { isPrivate?: boolean }) => {
   const renderNav = (isPrivate: boolean) => {
@@ -7,19 +12,43 @@ export const Navbar = ({ isPrivate = false }: { isPrivate?: boolean }) => {
       case true:
         return (
           <>
-            <Link to="/products">Product</Link> |{" "}
-            <Link to="/profile">Profile</Link> |{" "}
-            <Link to="/logout">Logout</Link>
+            <Button component={Link} to='/products' color='inherit'>
+              Product
+            </Button>
+
+            <Button component={Link} to='/profile' color='inherit'>
+              Profile
+            </Button>
+
+            <Button component={Link} to='/logout' color='inherit'>
+              Logout
+            </Button>
           </>
-        );
+        )
       default:
         return (
           <>
-            <Link to="/login">Login</Link> |{" "}
-            <Link to="/register">Register</Link>
+            <Button component={Link} to='/login' color='inherit'>
+              Login
+            </Button>
+
+            <Button component={Link} to='/register' color='inherit'>
+              Register
+            </Button>
           </>
-        );
+        )
     }
-  };
-  return renderNav(isPrivate);
-};
+  }
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+            Take Home | Ashraf
+          </Typography>
+          {renderNav(isPrivate)}
+        </Toolbar>
+      </AppBar>
+    </Box>
+  )
+}
