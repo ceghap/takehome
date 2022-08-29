@@ -27,7 +27,7 @@ export const RegisterForm = () => {
       country: profile.data.country || '',
       city: profile.data.city || '',
       password: profile.data.password || '',
-      photoId: profile.data.photoId || null,
+      photoId: profile.data.photoId || undefined,
       active: profile.data.active || false,
       confirmPassword: '',
     },
@@ -38,6 +38,8 @@ export const RegisterForm = () => {
       navigate('/preview')
     },
   })
+
+  console.log(formik)
 
   return (
     <>
@@ -56,7 +58,10 @@ export const RegisterForm = () => {
             name='name'
             id='name'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
           />
           <TextField
             fullWidth
@@ -66,6 +71,7 @@ export const RegisterForm = () => {
             name='email'
             id='email'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
@@ -78,6 +84,7 @@ export const RegisterForm = () => {
             name='username'
             id='username'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.username}
             error={formik.touched.username && Boolean(formik.errors.username)}
             helperText={formik.touched.username && formik.errors.username}
@@ -90,6 +97,7 @@ export const RegisterForm = () => {
             name='password'
             id='password'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.password}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
@@ -102,6 +110,7 @@ export const RegisterForm = () => {
             name='confirmPassword'
             id='confirmPassword'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.confirmPassword}
             error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
             helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
@@ -114,6 +123,7 @@ export const RegisterForm = () => {
             name='address'
             id='address'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.address}
             error={formik.touched.address && Boolean(formik.errors.address)}
             helperText={formik.touched.address && formik.errors.address}
@@ -127,6 +137,7 @@ export const RegisterForm = () => {
             name='country'
             id='country'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.country}
             error={formik.touched.country && Boolean(formik.errors.country)}
             helperText={formik.touched.country && formik.errors.country}
@@ -139,6 +150,7 @@ export const RegisterForm = () => {
             name='city'
             id='city'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.city}
             error={formik.touched.city && Boolean(formik.errors.city)}
             helperText={formik.touched.city && formik.errors.city}
@@ -151,6 +163,7 @@ export const RegisterForm = () => {
             name='postcode'
             id='postcode'
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.postcode}
             error={formik.touched.postcode && Boolean(formik.errors.postcode)}
             helperText={formik.touched.postcode && formik.errors.postcode}
@@ -163,6 +176,7 @@ export const RegisterForm = () => {
             type='file'
             name='photoId'
             id='photoId'
+            inputProps={{ accept: 'image/jpg, image/jpeg, image/png' }}
             onChange={(e) => {
               const files = (e.currentTarget as HTMLInputElement).files
               if (files) {
@@ -175,9 +189,10 @@ export const RegisterForm = () => {
                 }
               }
             }}
+            onBlur={formik.handleBlur}
             error={formik.touched.photoId && Boolean(formik.errors.photoId)}
+            helperText={formik.touched.photoId && formik.errors.photoId}
           />
-
           <Thumb file={formik.values.photoId} />
 
           <Button color='primary' variant='contained' fullWidth type='submit'>

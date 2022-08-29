@@ -21,7 +21,7 @@ export interface Profile {
   city: string
   postcode: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  photoId: any
+  photoId?: File | undefined | string
 }
 
 export interface SliceState {

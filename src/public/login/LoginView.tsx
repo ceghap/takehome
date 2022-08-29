@@ -10,7 +10,7 @@ import { Login } from '../../utils/login'
 import { validationSchema } from './LoginValidator'
 
 interface Props {
-  setUser: (value: Profile) => void
+  setUser: (value: Omit<Profile, 'profileId'>) => void
 }
 
 interface FormValues {

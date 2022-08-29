@@ -26,7 +26,7 @@ export const PreviewForm = () => {
       country: profile.data.country || '',
       city: profile.data.city || '',
       password: profile.data.password || '',
-      photoId: profile.data.photoId || null,
+      photoId: profile.data.photoId || undefined,
       active: profile.data.active || false,
     },
     enableReinitialize: true,
