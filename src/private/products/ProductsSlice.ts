@@ -17,20 +17,24 @@ export const fetchAllProducts = createAsyncThunk('products/fetchAll', async () =
 });
 
 export const createProduct = createAsyncThunk('product/create', async (values: Product) => {
-  const body: Product = {
+  const body = {
     title: values.title,
     description: values.description,
     price: Number(values.price),
     image: 'https://via.placeholder.com/600x400',
   };
 
-  const response = await axios.post<Product>('https://api.storerestapi.com/products', body, {
-    headers: {
-      'Content-type': 'application/json',
+  const response = await axios.post<{ data: Product }>(
+    'https://api.storerestapi.com/products',
+    body,
+    {
+      headers: {
+        'Content-type': 'application/json',
+      },
     },
-  });
+  );
 
-  return response.data;
+  return response.data.data as Product;
 });
 
 export interface Product {
@@ -129,15 +133,18 @@ export const productSlice = createSlice({
       state.product.loading = true;
     });
     builder.addCase(createProduct.fulfilled, (state, action: PayloadAction<Product>) => {
-      state.product.loading = false;
-      state.products.loading = false;
-      state.product.data = {
+      const product: Product = {
+        _id: action.payload._id,
         title: action.payload.title,
         description: action.payload.description,
         price: action.payload.price,
         image: action.payload.image,
       };
-      // state.products.data = state.products.data?.unshift()
+      state.product.loading = false;
+      state.products.loading = false;
+      state.product.data = product;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      state.products.data = [product, ...state.products.data!];
     });
     builder.addCase(createProduct.rejected, (state, action) => {
       state.product.loading = false;
