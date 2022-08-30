@@ -107,6 +107,7 @@ export const ProductsTable = () => {
                 <TableCell align='left'>Name</TableCell>
                 <TableCell align='left'>Description</TableCell>
                 <TableCell align='left'>Image</TableCell>
+                <TableCell align='left'>Price</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -120,6 +121,7 @@ export const ProductsTable = () => {
                     <TableCell align='left'>{product.title}</TableCell>
                     <TableCell align='left'>{product.description}</TableCell>
                     <TableCell align='left'>{product.image}</TableCell>
+                    <TableCell align='left'>{product.price}</TableCell>
                   </TableRow>
                 ))}
             </TableBody>

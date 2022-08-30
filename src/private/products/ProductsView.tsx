@@ -18,6 +18,11 @@ export const ProductsView = () => {
         API from https://api.storerestapi.com/products?limit=10&page=0. Every page change, this API
         returns same response
       </Alert>
+      <Alert severity='info' sx={{ margin: '20px 0' }}>
+        Creating new product wont update the API response. The table updated only after it is
+        success the post req to create app. when the page &quot;refresh&quot; the fetch function did
+        not get the created product.
+      </Alert>
 
       <h1>Products</h1>
 
