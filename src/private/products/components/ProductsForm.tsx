@@ -75,6 +75,7 @@ export const ProductsForm = ({
           name='image'
           label='Product Image'
           type='file'
+          inputProps={{ accept: 'image/jpg, image/jpeg, image/png' }}
           value={formik.values.image}
           onChange={formik.handleChange}
           error={formik.touched.image && Boolean(formik.errors.image)}
